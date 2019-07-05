@@ -1,4 +1,8 @@
 #include <iostream>
+
+#define MAX_ENTITY 2
+#define MAX_COMPONENT 2
+
 #include <ecs/ecs.hpp>
 
 
@@ -62,8 +66,10 @@ int main() {
 
     std::cout   << "\nremoving entity... \n";
     ecs::remove(e);
+    ecs::update();
+
     assert(!ecs::entity::exist(e));
-    //TODO: assert all components are removed
+	assert(!ecs::exist<name>(e));
 
 
     std::cout   << "\ntesting sequence done.\n";
