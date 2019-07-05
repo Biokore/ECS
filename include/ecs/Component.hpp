@@ -1,7 +1,15 @@
 
 #pragma once
 
+#ifndef MAX_ENTITY
+	#define MAX_ENTITY 0xFFFF   // 65'536 entities max
+#endif
+#ifndef MAX_COMPONENT
+	#define MAX_COMPONENT 0x3F    // 64 different components
+#endif
+
 #include "tools/ComponentPool.hpp"
+
 
 
 namespace ecs
@@ -10,10 +18,9 @@ namespace ecs
     {
         template<typename ComponentType>
         ComponentPool<ComponentType> & getPool() {
-            static ComponentPool<ComponentType> mComponentPool;
+            static ComponentPool<ComponentType> mComponentPool{MAX_ENTITY};
             return mComponentPool;
         }
-
 
         template<typename ComponentType, typename ...Args>
         void attach(index_t const entityID, Args ... args) {
